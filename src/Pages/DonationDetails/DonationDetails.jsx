@@ -65,7 +65,7 @@ const DonationDetails = () => {
           <button
             onClick={handleDonate}
             style={{ backgroundColor: donateItems.text_button_bg }}
-            className=" text-white py-3 px-5 rounded-md font-semibold text-xl"
+            className=" text-white md:py-3 px-4 md:px-5 py-3 rounded-md font-semibold md:text-xl text-base "
           >
             Donate $ {donateItems.price}
           </button>
@@ -73,7 +73,7 @@ const DonationDetails = () => {
       </div>
 
       <div className="my-10">
-        <h2 className="text-4xl text-[#0B0B0B] font-bold">
+        <h2 className="md:text-4xl text-2xl text-[#0B0B0B] font-bold">
           {donateItems.title}
         </h2>
         <p className="text-[#0B0B0BB2] text-justify leading-loose	 mt-6">

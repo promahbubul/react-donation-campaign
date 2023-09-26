@@ -8,7 +8,7 @@ const DonnerCardContainer = ({ donated }) => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-5 mb-5">
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-5 mb-5">
         {isSeeMore
           ? donated.map((donate) => (
               <DonationCard key={donate.id} donate={donate} />
