@@ -1,34 +1,83 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const DonationDetails = () => {
-    
+  const [donateItems, setDonateItem] = useState({});
+
+  const { data } = useLoaderData();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const findDonate = data.find((donate) => donate.id == id);
+    setDonateItem(findDonate);
+  }, [id, data]);
+
+  const handleDonate = () => {
+    const donateAdded = [];
+    const donateItem = JSON.parse(localStorage.getItem("donates"));
+    if (!donateItem) {
+      donateAdded.push(donateItems);
+      localStorage.setItem("donates", JSON.stringify(donateAdded));
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your Donation Success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      const isExist = donateItem.find((donation) => donation.id == id);
+
+      // console.log(!isExist);
+
+      if (!isExist) {
+        donateAdded.push(...donateItem, donateItems);
+        localStorage.setItem("donates", JSON.stringify(donateAdded));
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Donation Success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Already Donated",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
+  };
+
   return (
     <div>
       <div className="w-full rounded-xl  rounded-lg relative ">
         <img
-          src=""
+          src={donateItems.picture}
           alt=""
           className="w-full object-cover h-[65vh] rounded-xl"
         />
         <div className="p-5 w-full absolute rounded-b-xl  bottom-0 bg-[#0B0B0B80]">
-          <button className="bg-red-600 text-white py-3 px-5 rounded-sm">
-            Donate $ 2500
+          <button
+            onClick={handleDonate}
+            style={{ backgroundColor: donateItems.text_button_bg }}
+            className=" text-white py-3 px-5 rounded-md font-semibold text-xl"
+          >
+            Donate $ {donateItems.price}
           </button>
         </div>
       </div>
 
       <div className="my-10">
-        <h2 className="text-4xl text-[#0B0B0B] font-bold">picture</h2>
+        <h2 className="text-4xl text-[#0B0B0B] font-bold">
+          {donateItems.title}
+        </h2>
         <p className="text-[#0B0B0BB2] text-justify leading-loose	 mt-6">
-          There are many things that can be done to ensure that all people have
-          access to a good education. Governments can invest in public schools,
-          provide financial assistance to students, and make sure that all
-          schools have qualified teachers and resources. Families can support
-          their children's education by creating a learning environment at home
-          and helping them with their schoolwork. Teachers can create a positive
-          and supportive learning environment for their students and challenge
-          them to reach their full potential.
+          {donateItems.description}
         </p>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const DonationCard = ({ donate }) => {
   const {
@@ -12,6 +12,7 @@ const DonationCard = ({ donate }) => {
     price,
     text_button_bg,
   } = donate;
+
   return (
     <div
       style={{ backgroundColor: card_bg }}
@@ -34,12 +35,14 @@ const DonationCard = ({ donate }) => {
         >
           $ {price.toFixed(2)}
         </p>
-        <button
-          style={{ backgroundColor: text_button_bg }}
-          className="px-5 py-2 rounded-md text-white text-lg font-semibold"
-        >
-          View Details
-        </button>
+        <Link to={`/donation/${id}`}>
+          <button
+            style={{ backgroundColor: text_button_bg }}
+            className="px-5 py-2 rounded-md text-white text-lg font-semibold"
+          >
+            View Details
+          </button>
+        </Link>
       </div>
     </div>
   );

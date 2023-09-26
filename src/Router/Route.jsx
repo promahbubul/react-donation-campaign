@@ -18,9 +18,10 @@ const useCustomeRoute = createBrowserRouter([
       {
         path: "/statistics",
         element: <Statistics />,
+        loader: () => fetch("/donate.json"),
       },
       {
-        path: "/donation",
+        path: "/donations",
         element: <Donation />,
         loader: () => fetch("/donate.json"),
       },
