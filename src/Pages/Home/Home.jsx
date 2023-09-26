@@ -8,7 +8,7 @@ const Home = () => {
 
   return (
     <div>
-      <Hero />
+      <Hero data={data} />
       <HomeCardContainer donates={data} />
     </div>
   );

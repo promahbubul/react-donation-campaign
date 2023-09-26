@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Hero = () => {
+const Hero = ({ data }) => {
+  const [searchData, setSearchData] = useState("");
+  const [filterData, setFilterData] = useState([]);
+
+  const handleSearch = () => {
+    const filterSearchData = data.filter(
+      (item) => item.category === searchData
+    );
+    setFilterData(filterSearchData);
+  };
+
   return (
     <div className="h-[350px] gap-6 flex flex-col items-center justify-center ">
       <h1 className="text-5xl text-center mb-6 font-extrabold">
@@ -8,11 +18,15 @@ const Hero = () => {
       </h1>
       <div className=" rounded-md">
         <input
+          onChange={(e) => setSearchData(e.target.value)}
           type="text"
           placeholder="Search here..."
           className="w-[400px] px-4 border-2 border-r-0 border-[#DEDEDE] py-3 outline-none rounded-l-xl"
         />
-        <button className="bg-[#FF444A] rounded-r-xl py-3 text-white text-lg font-bold px-5">
+        <button
+          onClick={() => handleSearch()}
+          className="bg-[#FF444A] rounded-r-xl py-3 text-white text-lg font-bold px-5"
+        >
           Search
         </button>
       </div>
